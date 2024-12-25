@@ -71,6 +71,16 @@ long long traverse(link curr_stone, int blinks_left, link single_digits[]) {
     }
   }
 
+  if (curr_stone->child2 != NULL) {
+    // if we already know the node, and it has two children, traverse both
+    return traverse(curr_stone->child1, blinks_left - 1, single_digits) +
+           traverse(curr_stone->child2, blinks_left - 1, single_digits);
+  } else if (curr_stone->child1 != NULL) {
+    // if we already know the node and it has one child, traverse that one
+    return traverse(curr_stone->child1, blinks_left - 1, single_digits);
+  }
+  // otherwise, calculate new
+
   // the number isnt known yet, so we calculate the next
   long long num_digits = count_digits(curr_stone->item);
   if (curr_stone->item == 0) {
